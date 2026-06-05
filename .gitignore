@@ -1,0 +1,19 @@
+# Data: never commit the dataset itself
+data/raw/*
+!data/raw/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment and editor noise
+.env
+.DS_Store
+.vscode/
+.idea/
