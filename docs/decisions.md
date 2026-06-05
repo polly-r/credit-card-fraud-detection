@@ -43,3 +43,25 @@ it that way?" always has an answer here, including the dead ends.
   mean no multicollinearity to handle.
 - **Data is highly separable.** The project will be framed around reasoning,
   calibration and threshold choice rather than headline accuracy.
+
+## 2026-06-05 — Preprocessing pipeline
+
+- **log1p then StandardScaler on continuous features.** Log transform handles 
+  the heavy right skew. Scaling brings features onto a comparable range for 
+  linear models. Tree-based models do not need this but the same pipeline is 
+  applied to all models for a clean comparison.
+- **Binary features passed through unchanged.** Already on a 0/1 scale, no 
+  transformation needed.
+- **Fit on training data only.** Leakage check confirmed scaler means match 
+  the training set exactly.  
+
+  ## 2026-06-05 — Baseline model
+
+- **Logistic regression as baseline.** Fast, interpretable, well understood. 
+  Sets a floor every subsequent model must beat.
+- **PR-AUC as primary metric.** Baseline scores 0.7822. ROC-AUC of 0.9624 
+  is secondary.
+- **Threshold 0.5 misses 40% of fraud.** Recall of 0.60 at default threshold 
+  is the main weakness. Threshold tuning deferred to Phase 5.
+- **Accuracy is not reported as a headline metric.** Naive classifier scores 
+  91.3%, making accuracy uninformative here.
